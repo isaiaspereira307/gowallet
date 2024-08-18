@@ -1,49 +1,46 @@
-package handler
+package handlers
 
 import (
 	"net/http"
 	"strconv"
 
-	"github.com/isaiaspereira307/gowallet/internal/db"
-
 	"github.com/gin-gonic/gin"
+	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
-func GetUser(ctx *gin.Context, queries *db.Queries) {
+func GetFixedExpense(ctx *gin.Context, queries *db.Queries) {
 	id := ctx.Param("id")
 	idInt32, err := strconv.ParseInt(id, 10, 32)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
 		return
 	}
-	user, err := queries.GetUserById(ctx, int32(idInt32))
+	fixedExpense, err := queries.GetFixedExpenseById(ctx, int32(idInt32))
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get user"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get fixed expense"})
 		return
 	}
 
-	ctx.JSON(http.StatusOK, user)
+	ctx.JSON(http.StatusOK, fixedExpense)
 }
 
-// Handler para criar um novo usuário
-func CreateUser(ctx *gin.Context, queries *db.Queries) {
-	var req db.CreateUserParams
+func CreateFixedExpense(ctx *gin.Context, queries *db.Queries) {
+	var req db.CreateFixedExpenseParams
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
 	}
 
-	err := queries.CreateUser(ctx, req)
+	err := queries.CreateFixedExpense(ctx, req)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create user"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create fixed expense"})
 		return
 	}
 
 	ctx.JSON(http.StatusCreated, req)
 }
 
-// Handler para atualizar um usuário
-func UpdateUser(ctx *gin.Context, queries *db.Queries) {
+func UpdateFixedExpense(ctx *gin.Context, queries *db.Queries) {
 	id := ctx.Param("id")
 	idInt32, err := strconv.ParseInt(id, 10, 32)
 	if err != nil {
@@ -51,24 +48,23 @@ func UpdateUser(ctx *gin.Context, queries *db.Queries) {
 		return
 	}
 
-	var req db.UpdateUserParams
+	var req db.UpdateFixedExpenseParams
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
 	}
 
 	req.ID = int32(idInt32)
-	err = queries.UpdateUser(ctx, req)
+	err = queries.UpdateFixedExpense(ctx, req)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update user"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update fixed expense"})
 		return
 	}
 
 	ctx.JSON(http.StatusOK, req)
 }
 
-// Handler para deletar um usuário
-func DeleteUser(ctx *gin.Context, queries *db.Queries) {
+func DeleteFixedExpense(ctx *gin.Context, queries *db.Queries) {
 	id := ctx.Param("id")
 	idInt32, err := strconv.ParseInt(id, 10, 32)
 	if err != nil {
@@ -76,9 +72,9 @@ func DeleteUser(ctx *gin.Context, queries *db.Queries) {
 		return
 	}
 
-	err = queries.DeleteUser(ctx, int32(idInt32))
+	err = queries.DeleteFixedExpense(ctx, int32(idInt32))
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to delete user"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to delete fixed expense"})
 		return
 	}
 
