@@ -2,7 +2,10 @@ package configs
 
 import "github.com/spf13/viper"
 
-var cfg *config
+var (
+	cfg    *config
+	logger *Logger
+)
 
 type config struct {
 	API APIConfig
@@ -57,4 +60,9 @@ func GetDB() DBConfig {
 
 func GetServerPort() string {
 	return cfg.API.Port
+}
+
+func GetLogger(p string) *Logger {
+	logger = NewLogger(p)
+	return logger
 }

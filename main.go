@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/isaiaspereira307/gowallet/configs"
@@ -22,9 +21,5 @@ func main() {
 	defer conn.Close()
 
 	queries := db.New(conn)
-	port := fmt.Sprintf(":%s", configs.GetServerPort())
-	r := routes.SetupRouter(queries)
-	if err := r.Run(port); err != nil {
-		log.Fatal("Failed to run server:", err)
-	}
+	routes.Initialize(queries)
 }
