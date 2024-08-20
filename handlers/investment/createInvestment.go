@@ -7,6 +7,17 @@ import (
 	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
+// @BasePath /api/v1
+// @Summary Create an Investment
+// @Description Create an Investment
+// @Tags investment
+// @Accept json
+// @Produce json
+// @Param request body CreateInvestmentRequest true "Create Investment Params"
+// @Success 200 {object} CreateInvestmentResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /investments [post]
 func CreateInvestment(ctx *gin.Context, queries *db.Queries) {
 	var req db.CreateInvestmentParams
 	if err := ctx.ShouldBindJSON(&req); err != nil {
