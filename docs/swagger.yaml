@@ -1,0 +1,1402 @@
+definitions:
+  db.BankAccount:
+    properties:
+      balance:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  db.Bitcoin:
+    properties:
+      bank_account_id:
+        type: integer
+      id:
+        type: integer
+      purchase_date:
+        type: string
+      purchase_price:
+        type: string
+      quantity:
+        type: string
+    type: object
+  db.CreateBitcoinParams:
+    properties:
+      bankAccountID:
+        type: integer
+      id:
+        type: integer
+      purchaseDate:
+        type: string
+      purchasePrice:
+        type: string
+      quantity:
+        type: string
+    type: object
+  db.FixedExpense:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+    type: object
+  db.Investment:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  db.Loan:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      created_at:
+        type: string
+      due_date:
+        type: string
+      id:
+        type: integer
+      interest_rate:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  db.Transaction:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      credit_debit:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: integer
+      timestamp:
+        type: string
+    type: object
+  db.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  handlers.CreateBankAccountRequest:
+    properties:
+      balance:
+        type: string
+      name:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  handlers.CreateBankAccountResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.BankAccount'
+      message:
+        type: string
+    type: object
+  handlers.CreateFixedExpenseRequest:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      description:
+        type: string
+    required:
+    - amount
+    - bank_account_id
+    - description
+    type: object
+  handlers.CreateFixedExpenseResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.FixedExpense'
+      message:
+        type: string
+    type: object
+  handlers.CreateInvestmentRequest:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+    required:
+    - amount
+    - bank_account_id
+    type: object
+  handlers.CreateInvestmentResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Investment'
+      message:
+        type: string
+    type: object
+  handlers.CreateLoanRequest:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      due_date:
+        type: string
+      interest_rate:
+        type: string
+    required:
+    - amount
+    - bank_account_id
+    - due_date
+    - interest_rate
+    type: object
+  handlers.CreateLoanResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Loan'
+      message:
+        type: string
+    type: object
+  handlers.CreateTransactionRequest:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      credit_debit:
+        type: boolean
+      description:
+        type: string
+    type: object
+  handlers.CreateTransactionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Transaction'
+      message:
+        type: string
+    type: object
+  handlers.CreateUserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  handlers.CreateUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.User'
+      message:
+        type: string
+    type: object
+  handlers.DeleteBankAccountResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.BankAccount'
+      message:
+        type: string
+    type: object
+  handlers.DeleteBitcoinResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Bitcoin'
+      message:
+        type: string
+    type: object
+  handlers.DeleteFixedExpenseResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.FixedExpense'
+      message:
+        type: string
+    type: object
+  handlers.DeleteInvestmentResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Investment'
+      message:
+        type: string
+    type: object
+  handlers.DeleteLoanResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Loan'
+      message:
+        type: string
+    type: object
+  handlers.DeleteTransactionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Transaction'
+      message:
+        type: string
+    type: object
+  handlers.DeleteUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.User'
+      message:
+        type: string
+    type: object
+  handlers.ListUserResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/db.User'
+        type: array
+      message:
+        type: string
+    type: object
+  handlers.ShowBankAccountResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.BankAccount'
+      message:
+        type: string
+    type: object
+  handlers.ShowBitcoinResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Bitcoin'
+      message:
+        type: string
+    type: object
+  handlers.ShowFixedExpenseResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.FixedExpense'
+      message:
+        type: string
+    type: object
+  handlers.ShowInvestmentResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Investment'
+      message:
+        type: string
+    type: object
+  handlers.ShowLoanResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Loan'
+      message:
+        type: string
+    type: object
+  handlers.ShowTransactionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Transaction'
+      message:
+        type: string
+    type: object
+  handlers.ShowUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.User'
+      message:
+        type: string
+    type: object
+  handlers.UpdateBankAccountResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.BankAccount'
+      message:
+        type: string
+    type: object
+  handlers.UpdateBitcoinRequest:
+    properties:
+      bank_account_id:
+        type: integer
+      id:
+        type: integer
+      purchase_date:
+        type: string
+      purchase_price:
+        type: string
+      quantity:
+        type: string
+    required:
+    - bank_account_id
+    - id
+    - purchase_date
+    - purchase_price
+    - quantity
+    type: object
+  handlers.UpdateBitcoinResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Bitcoin'
+      message:
+        type: string
+    type: object
+  handlers.UpdateFixedExpenseRequest:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+    required:
+    - amount
+    - bank_account_id
+    - description
+    - id
+    type: object
+  handlers.UpdateFixedExpenseResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.FixedExpense'
+      message:
+        type: string
+    type: object
+  handlers.UpdateInvestmentRequest:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      id:
+        type: integer
+    required:
+    - amount
+    - bank_account_id
+    - id
+    type: object
+  handlers.UpdateInvestmentResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Investment'
+      message:
+        type: string
+    type: object
+  handlers.UpdateLoanRequest:
+    properties:
+      amount:
+        type: string
+      bank_account_id:
+        type: integer
+      due_date:
+        type: string
+      id:
+        type: integer
+      interest_rate:
+        type: string
+    required:
+    - amount
+    - bank_account_id
+    - due_date
+    - id
+    - interest_rate
+    type: object
+  handlers.UpdateLoanResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Loan'
+      message:
+        type: string
+    type: object
+  handlers.UpdateTransactionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Transaction'
+      message:
+        type: string
+    type: object
+  handlers.UpdateUserRequest:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - id
+    - name
+    - password
+    type: object
+  handlers.UpdateUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.User'
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /bank_accounts:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a BankAccount
+      parameters:
+      - description: Delete BankAccount Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteBankAccountResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+      summary: Delete a BankAccount
+      tags:
+      - bank account
+    get:
+      consumes:
+      - application/json
+      description: Show an BankAccount
+      parameters:
+      - description: Show BankAccount Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowBankAccountResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+      summary: Show a BankAccount
+      tags:
+      - bank account
+    post:
+      consumes:
+      - application/json
+      description: Create a BankAccount
+      parameters:
+      - description: Create BankAccount Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateBankAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateBankAccountResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+      summary: Create a BankAccount
+      tags:
+      - bank account
+    put:
+      consumes:
+      - application/json
+      description: Update a BankAccount
+      parameters:
+      - description: BankAccount ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update BankAccount Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateBankAccountResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse'
+      summary: Update a BankAccount
+      tags:
+      - bank account
+  /bitcoin-price:
+    get:
+      consumes:
+      - application/json
+      description: Show an Bitcoin Price USD
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: number
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+      summary: Show Bitcoin Price USD
+      tags:
+      - bitcoin
+  /bitcoins:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a Bitcoin
+      parameters:
+      - description: Delete Bitcoin Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteBitcoinResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+      summary: Delete a Bitcoin
+      tags:
+      - bitcoin
+    get:
+      consumes:
+      - application/json
+      description: Show an Bitcoin
+      parameters:
+      - description: Show Bitcoin Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowBitcoinResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+      summary: Show Bitcoin
+      tags:
+      - bitcoin
+    post:
+      consumes:
+      - application/json
+      description: Create a Bitcoin
+      parameters:
+      - description: Create Bitcoin Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateBankAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/db.CreateBitcoinParams'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+      summary: Create a Bitcoin
+      tags:
+      - bitcoin
+    put:
+      consumes:
+      - application/json
+      description: Update an Bitcoin
+      parameters:
+      - description: Bitcoin ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update Bitcoin Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateBitcoinRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateBitcoinResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse'
+      summary: Update an Bitcoin
+      tags:
+      - bitcoin
+  /fixed_expenses:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an FixedExpense
+      parameters:
+      - description: Delete FixedExpense Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteFixedExpenseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+      summary: Delete an FixedExpense
+      tags:
+      - fixed expense
+    get:
+      consumes:
+      - application/json
+      description: Show an FixedExpense
+      parameters:
+      - description: Show FixedExpense Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowFixedExpenseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+      summary: Show FixedExpense
+      tags:
+      - fixed expense
+    post:
+      consumes:
+      - application/json
+      description: Create an FixedExpense
+      parameters:
+      - description: Create FixedExpense Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateFixedExpenseRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateFixedExpenseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+      summary: Create an FixedExpense
+      tags:
+      - fixed expense
+    put:
+      consumes:
+      - application/json
+      description: Update an FixedExpense
+      parameters:
+      - description: FixedExpense ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update FixedExpense Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateFixedExpenseRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateFixedExpenseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse'
+      summary: Update an FixedExpense
+      tags:
+      - fixed expense
+  /investments:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an Investment
+      parameters:
+      - description: Delete Investment Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteInvestmentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+      summary: Delete an Investment
+      tags:
+      - investment
+    get:
+      consumes:
+      - application/json
+      description: Show an Investment
+      parameters:
+      - description: Show Investment Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowInvestmentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+      summary: Show Investment
+      tags:
+      - investment
+    post:
+      consumes:
+      - application/json
+      description: Create an Investment
+      parameters:
+      - description: Create Investment Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateInvestmentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateInvestmentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+      summary: Create an Investment
+      tags:
+      - investment
+    put:
+      consumes:
+      - application/json
+      description: Update an Investment
+      parameters:
+      - description: Investment ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update Investment Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateInvestmentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateInvestmentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse'
+      summary: Update an Investment
+      tags:
+      - investment
+  /loans:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an Loan
+      parameters:
+      - description: Delete Loan Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteLoanResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+      summary: Delete an Loan
+      tags:
+      - loan
+    get:
+      consumes:
+      - application/json
+      description: Show an Loan
+      parameters:
+      - description: Show Loan Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowLoanResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+      summary: Show Loan
+      tags:
+      - loan
+    post:
+      consumes:
+      - application/json
+      description: Create an Loan
+      parameters:
+      - description: Create Loan Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateLoanRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateLoanResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+      summary: Create an Loan
+      tags:
+      - loan
+    put:
+      consumes:
+      - application/json
+      description: Update an Loan
+      parameters:
+      - description: Loan ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update Loan Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateLoanRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateLoanResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse'
+      summary: Update an Loan
+      tags:
+      - loan
+  /transactions:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a transaction
+      parameters:
+      - description: Delete Transaction Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteTransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+      summary: Delete a transaction
+      tags:
+      - transaction
+    get:
+      consumes:
+      - application/json
+      description: Show an transaction
+      parameters:
+      - description: Show Transaction Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowTransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+      summary: Show a transaction
+      tags:
+      - transaction
+    post:
+      consumes:
+      - application/json
+      description: Create a Transaction
+      parameters:
+      - description: Create Transaction Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateTransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+      summary: Create a Transaction
+      tags:
+      - transaction
+    put:
+      consumes:
+      - application/json
+      description: Update a Transaction
+      parameters:
+      - description: Transaction ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update Transaction Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateTransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse'
+      summary: Update a Transaction
+      tags:
+      - transaction
+  /users:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an user
+      parameters:
+      - description: Delete User Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+      summary: Delete an user
+      tags:
+      - user
+    get:
+      consumes:
+      - application/json
+      description: Show all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ListUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+      summary: Show users
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: Create an user
+      parameters:
+      - description: Create User Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+      summary: Create an user
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      description: Update an user
+      parameters:
+      - description: User ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update User Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse'
+      summary: Update an user
+      tags:
+      - user
+swagger: "2.0"

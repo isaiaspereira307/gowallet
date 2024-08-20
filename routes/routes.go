@@ -59,6 +59,9 @@ func InitializeRoutes(router *gin.Engine, queries *db.Queries) {
 		v1.GET("/bitcoins/:id", func(ctx *gin.Context) {
 			bitcoin_handlers.GetBitcoin(ctx, queries)
 		})
+		v1.GET("/bitcoin-price", func(ctx *gin.Context) {
+			bitcoin_handlers.GetBitcoinPriceUSD()
+		})
 		v1.POST("/bitcoins", func(ctx *gin.Context) {
 			bitcoin_handlers.CreateBitcoin(ctx, queries)
 		})
