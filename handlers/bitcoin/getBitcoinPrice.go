@@ -8,15 +8,16 @@ import (
 	"strconv"
 )
 
-type BitcoinUsd struct {
-	Mid       string `json:"mid"`
-	Bid       string `json:"bid"`
-	Ask       string `json:"ask"`
-	LastPrice string `json:"last_price"`
-	Low       string `json:"low"`
-	High      string `json:"high"`
-}
-
+// @BasePath /api/v1
+// @Summary Show Bitcoin Price USD
+// @Description Show an Bitcoin Price USD
+// @Tags bitcoin
+// @Accept json
+// @Produce json
+// @Success 200 {object} float64
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /bitcoin-price [get]
 func GetBitcoinPriceUSD() float64 {
 	url := "https://api.bitfinex.com/v1/pubticker/btcusd"
 	req, err := http.Get(url)

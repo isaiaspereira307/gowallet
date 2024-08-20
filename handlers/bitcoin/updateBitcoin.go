@@ -8,6 +8,19 @@ import (
 	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
+// @BasePath /api/v1
+// @Summary Update an Bitcoin
+// @Description Update an Bitcoin
+// @Tags bitcoin
+// @Accept json
+// @Produce json
+// @Param id query string true "Bitcoin ID"
+// @Param request body UpdateBitcoinRequest true "Update Bitcoin Request"
+// @Success 200 {object} UpdateBitcoinResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /bitcoins [put]
 func UpdateBitcoin(ctx *gin.Context, queries *db.Queries) {
 	id := ctx.Param("id")
 	idInt32, err := strconv.ParseInt(id, 10, 32)

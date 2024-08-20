@@ -7,6 +7,17 @@ import (
 	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
+// @BasePath /api/v1
+// @Summary Create a Bitcoin
+// @Description Create a Bitcoin
+// @Tags bitcoin
+// @Accept json
+// @Produce json
+// @Param request body CreateBankAccountRequest true "Create Bitcoin Params"
+// @Success 200 {object} db.CreateBitcoinParams
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /bitcoins [post]
 func CreateBitcoin(ctx *gin.Context, queries *db.Queries) {
 	var req db.CreateBitcoinParams
 	if err := ctx.ShouldBindJSON(&req); err != nil {
