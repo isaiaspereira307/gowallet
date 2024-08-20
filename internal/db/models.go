@@ -9,61 +9,61 @@ import (
 )
 
 type BankAccount struct {
-	ID        int32
-	UserID    int32
-	Name      string
-	Balance   string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID        int32 `json:"id"`
+	UserID    int32 `json:"user_id"`
+	Name      string `json:"name"`
+	Balance   string `json:"balance"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type Bitcoin struct {
-	ID            int32
-	BankAccountID int32
-	PurchasePrice string
-	Quantity      string
-	PurchaseDate  time.Time
+	ID            int32 `json:"id"`
+	BankAccountID int32 `json:"bank_account_id"`
+	PurchasePrice string `json:"purchase_price"`
+	Quantity      string `json:"quantity"`
+	PurchaseDate  time.Time `json:"purchase_date"`
 }
 
 type FixedExpense struct {
-	ID            int32
-	BankAccountID int32
-	Amount        string
-	Description   string
+	ID            int32 `json:"id"`
+	BankAccountID int32 `json:"bank_account_id"`
+	Amount        string `json:"amount"`
+	Description   string `json:"description"`
 }
 
 type Investment struct {
-	ID            int32
-	BankAccountID int32
-	Amount        string
-	CreatedAt     time.Time
-	UpdatedAt     time.Time
+	ID            int32 `json:"id"`
+	BankAccountID int32 `json:"bank_account_id"`
+	Amount        string `json:"amount"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
 }
 
 type Loan struct {
-	ID            int32
-	BankAccountID int32
-	Amount        string
-	InterestRate  string
-	DueDate       time.Time
-	CreatedAt     time.Time
-	UpdatedAt     time.Time
+	ID            int32 `json:"id"`
+	BankAccountID int32 `json:"bank_account_id"`
+	Amount        string `json:"amount"`
+	InterestRate  string `json:"interest_rate"`
+	DueDate       time.Time `json:"due_date"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
 }
 
 type Transaction struct {
-	ID            int32
-	BankAccountID int32
-	Amount        string
-	Timestamp     time.Time
-	Description   string
-	CreditDebit   bool
+	ID            int32 `json:"id"`
+	BankAccountID int32 `json:"bank_account_id"`
+	Amount        string `json:"amount"`
+	Timestamp     time.Time `json:"timestamp"`
+	Description   string `json:"description"`
+	CreditDebit   bool `json:"credit_debit"`
 }
 
 type User struct {
-	ID        int32
-	Name      string
-	Email     string
-	Password  string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID        int32 `json:"id"`
+	Name      string `json:"name"`
+	Email     string `json:"email"`
+	Password  string `json:"-"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
