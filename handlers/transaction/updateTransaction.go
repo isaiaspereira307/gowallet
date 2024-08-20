@@ -8,6 +8,19 @@ import (
 	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
+// @BasePath /api/v1
+// @Summary Update a Transaction
+// @Description Update a Transaction
+// @Tags transaction
+// @Accept json
+// @Produce json
+// @Param id query string true "Transaction ID"
+// @Param request body UpdateUserRequest true "Update Transaction Request"
+// @Success 200 {object} UpdateTransactionResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /transactions [put]
 func UpdateTransaction(ctx *gin.Context, queries *db.Queries) {
 	id := ctx.Param("id")
 	idInt32, err := strconv.ParseInt(id, 10, 32)
