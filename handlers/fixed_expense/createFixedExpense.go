@@ -7,6 +7,17 @@ import (
 	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
+// @BasePath /api/v1
+// @Summary Create an FixedExpense
+// @Description Create an FixedExpense
+// @Tags fixed expense
+// @Accept json
+// @Produce json
+// @Param request body CreateFixedExpenseRequest true "Create FixedExpense Params"
+// @Success 200 {object} CreateFixedExpenseResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /fixed_expenses [post]
 func CreateFixedExpense(ctx *gin.Context, queries *db.Queries) {
 	var req db.CreateFixedExpenseParams
 	if err := ctx.ShouldBindJSON(&req); err != nil {
