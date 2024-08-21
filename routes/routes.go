@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gowallet/docs"
+	"github.com/isaiaspereira307/gowallet/handlers"
 	bank_account_handlers "github.com/isaiaspereira307/gowallet/handlers/bank_account"
 	bitcoin_handlers "github.com/isaiaspereira307/gowallet/handlers/bitcoin"
 	fixed_expense_handlers "github.com/isaiaspereira307/gowallet/handlers/fixed_expense"
@@ -11,6 +12,7 @@ import (
 	transaction_handlers "github.com/isaiaspereira307/gowallet/handlers/transaction"
 	user_handlers "github.com/isaiaspereira307/gowallet/handlers/user"
 	"github.com/isaiaspereira307/gowallet/internal/db"
+	"github.com/isaiaspereira307/gowallet/middleware"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -122,6 +124,12 @@ func InitializeRoutes(router *gin.Engine, queries *db.Queries) {
 		})
 		v1.DELETE("/transactions/:id", func(ctx *gin.Context) {
 			transaction_handlers.DeleteTransaction(ctx, queries)
+		})
+		v1.POST("/login", func(ctx *gin.Context) {
+			handlers.Login(ctx, queries)
+		})
+		v1.GET("/home", middleware.AuthMiddleware(), func(ctx *gin.Context) {
+			handlers.Home(ctx)
 		})
 	}
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))

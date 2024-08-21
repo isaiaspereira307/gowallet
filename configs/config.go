@@ -13,7 +13,8 @@ type config struct {
 }
 
 type APIConfig struct {
-	Port string
+	Port      string
+	JwtSecret string
 }
 
 type DBConfig struct {
@@ -42,7 +43,8 @@ func Load() error {
 	}
 	cfg = new(config)
 	cfg.API = APIConfig{
-		Port: viper.GetString("api.port"),
+		Port:      viper.GetString("api.port"),
+		JwtSecret: viper.GetString("api.jwt_secret"),
 	}
 	cfg.DB = DBConfig{
 		Host:     viper.GetString("database.host"),
@@ -60,6 +62,10 @@ func GetDB() DBConfig {
 
 func GetServerPort() string {
 	return cfg.API.Port
+}
+
+func GetJwtSecret() string {
+	return cfg.API.JwtSecret
 }
 
 func GetLogger(p string) *Logger {

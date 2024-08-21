@@ -109,6 +109,13 @@ definitions:
       updated_at:
         type: string
     type: object
+  github_com_isaiaspereira307_gowallet_handlers.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
   github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse:
     properties:
       error_code:
@@ -272,6 +279,16 @@ definitions:
       message:
         type: string
     type: object
+  handlers.CredentialsRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
   handlers.DeleteBankAccountResponse:
     properties:
       data:
@@ -327,6 +344,13 @@ definitions:
         items:
           $ref: '#/definitions/db.User'
         type: array
+      message:
+        type: string
+    type: object
+  handlers.LoginResponse:
+    properties:
+      data:
+        type: string
       message:
         type: string
     type: object
@@ -1157,6 +1181,36 @@ paths:
       summary: Update an Loan
       tags:
       - loan
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: Login Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CredentialsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gowallet_handlers.ErrorResponse'
+      summary: Login
+      tags:
+      - login
   /transactions:
     delete:
       consumes:

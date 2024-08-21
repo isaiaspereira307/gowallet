@@ -1,5 +1,6 @@
 [api]
 port = "9000"
+jwt_secret = "330ij1w3*t__enex=&6j0zjuw&t=w44mi1@_9j7_i!wqs9&7*m"
 
 [database]
 host = "localhost"
