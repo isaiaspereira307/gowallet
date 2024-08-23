@@ -6,7 +6,6 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
 // @BasePath /api/v1
@@ -15,12 +14,12 @@ import (
 // @Tags investment
 // @Accept json
 // @Produce json
-// @Param id query string true "Show Investment Request"
+// @Param id path string true "Show Investment Request"
 // @Success 200 {object} ShowInvestmentResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /investments [get]
-func GetInvestment(ctx *gin.Context, queries *db.Queries) {
+// @Router /investment/{id} [get]
+func GetInvestment(ctx *gin.Context) {
 	id := ctx.Param("id")
 	idInt64, err := strconv.ParseInt(id, 10, 64)
 	if err != nil || idInt64 > math.MaxInt32 || idInt64 < math.MinInt32 {

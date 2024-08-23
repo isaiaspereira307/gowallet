@@ -2,11 +2,25 @@ package handlers
 
 import (
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gowallet/internal/db"
+	"golang.org/x/crypto/bcrypt"
 )
+
+var (
+	lastID int32
+	mu     sync.Mutex
+)
+
+func generateUniqueID() int32 {
+	mu.Lock()
+	defer mu.Unlock()
+	lastID++
+	return lastID
+}
 
 // @BasePath /api/v1
 // @Summary Create an user
@@ -25,17 +39,22 @@ func CreateUser(ctx *gin.Context) {
 		sendErr(ctx, err, http.StatusBadRequest)
 		return
 	}
-	users, err := queries.GetUsers(ctx)
+	err := req.Validate()
+	if err != nil {
+		sendErr(ctx, err, http.StatusBadRequest)
+		return
+	}
+	hashedPassword, err := hashPassword(req.Password)
 	if err != nil {
 		sendErr(ctx, err, http.StatusInternalServerError)
 		return
 	}
-	id := len(users) + 1
+
 	user := db.CreateUserParams{
-		ID:        int32(id),
+		ID:        generateUniqueID(),
 		Name:      req.Name,
 		Email:     req.Email,
-		Password:  req.Password,
+		Password:  hashedPassword,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -47,4 +66,9 @@ func CreateUser(ctx *gin.Context) {
 	}
 
 	sendSuccess(ctx, "createUser", req)
+}
+
+func hashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
 }

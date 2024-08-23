@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 // @BasePath /api/v1
@@ -18,25 +19,25 @@ import (
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Router /bitcoin-price [get]
-func GetBitcoinPriceUSD() float64 {
+func GetBitcoinPriceUSD(ctx *gin.Context) {
 	url := "https://api.bitfinex.com/v1/pubticker/btcusd"
 	req, err := http.Get(url)
 	if err != nil {
-		return 0.0
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get bitcoin"})
 	}
 	defer req.Body.Close()
 	body, err := io.ReadAll(req.Body)
 	if err != nil {
-		panic(err.Error())
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get bitcoin"})
 	}
 	var bitcoinUsd BitcoinUsd
 	err = json.Unmarshal(body, &bitcoinUsd)
 	if err != nil {
-		panic(err.Error())
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get bitcoin"})
 	}
 	floatNum, err := strconv.ParseFloat(bitcoinUsd.LastPrice, 64)
 	if err != nil {
-		fmt.Println("Erro na conversão:", err)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get bitcoin"})
 	}
-	return floatNum
+	ctx.JSON(http.StatusOK, floatNum)
 }

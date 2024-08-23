@@ -5,10 +5,20 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
-func GetTransactionByAccount(ctx *gin.Context, queries *db.Queries) {
+// @BasePath /api/v1
+// @Summary Show all transaction by account id
+// @Description Show all transaction by account id
+// @Tags transaction
+// @Accept json
+// @Produce json
+// @Param id path string true "Show List Transaction Request"
+// @Success 200 {object} ListTransactionResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /transactions/{id} [get]
+func GetTransactionByAccountId(ctx *gin.Context) {
 	accountID := ctx.Param("account_id")
 	accountIDInt32, err := strconv.ParseInt(accountID, 10, 32)
 	if err != nil {

@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/isaiaspereira307/gowallet/internal/db"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,12 +14,12 @@ import (
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param id query string true "Show User Request"
+// @Param id path string true "Show User Request"
 // @Success 200 {object} ShowUserResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /users [get]
-func GetUser(ctx *gin.Context, queries *db.Queries) {
+// @Router /user/{id} [get]
+func GetUser(ctx *gin.Context) {
 	id := ctx.Param("id")
 	idInt64, err := strconv.ParseInt(id, 10, 64)
 	if err != nil || idInt64 > math.MaxInt32 || idInt64 < math.MinInt32 {

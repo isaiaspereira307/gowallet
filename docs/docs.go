@@ -15,106 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/bank_accounts": {
-            "get": {
-                "description": "Show an BankAccount",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "bank account"
-                ],
-                "summary": "Show a BankAccount",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Show BankAccount Request",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.ShowBankAccountResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "Update a BankAccount",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "bank account"
-                ],
-                "summary": "Update a BankAccount",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "BankAccount ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "description": "Update BankAccount Request",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/handlers.UpdateUserRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.UpdateBankAccountResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
-                        }
-                    }
-                }
-            },
+        "/bank-account": {
             "post": {
                 "description": "Create a BankAccount",
                 "consumes": [
@@ -158,6 +59,50 @@ const docTemplate = `{
                         }
                     }
                 }
+            }
+        },
+        "/bank-account/{id}": {
+            "get": {
+                "description": "Show an BankAccount",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bank account"
+                ],
+                "summary": "Show a BankAccount",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show BankAccount Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ShowBankAccountResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
+                        }
+                    }
+                }
             },
             "delete": {
                 "description": "Delete a BankAccount",
@@ -176,7 +121,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Delete BankAccount Param",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -202,9 +147,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/bitcoin-price": {
+        "/bank-accounts/{id}": {
             "get": {
-                "description": "Show an Bitcoin Price USD",
+                "description": "Show all BankAccount",
                 "consumes": [
                     "application/json"
                 ],
@@ -212,50 +157,15 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "bitcoin"
+                    "bank account"
                 ],
-                "summary": "Show Bitcoin Price USD",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "number"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/bitcoins": {
-            "get": {
-                "description": "Show an Bitcoin",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "bitcoin"
-                ],
-                "summary": "Show Bitcoin",
+                "summary": "Show BankAccount",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Show Bitcoin Request",
+                        "description": "Show BankAccount Request",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -263,23 +173,77 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handlers.ShowBitcoinResponse"
+                            "$ref": "#/definitions/handlers.ListBankAccountResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse"
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse"
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
                         }
                     }
                 }
-            },
+            }
+        },
+        "/bank_account": {
+            "put": {
+                "description": "Update a BankAccount",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bank account"
+                ],
+                "summary": "Update a BankAccount",
+                "parameters": [
+                    {
+                        "description": "Update BankAccount Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.UpdateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.UpdateBankAccountResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bank_account.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/bitcoin": {
             "put": {
                 "description": "Update an Bitcoin",
                 "consumes": [
@@ -293,13 +257,6 @@ const docTemplate = `{
                 ],
                 "summary": "Update an Bitcoin",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Bitcoin ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    },
                     {
                         "description": "Update Bitcoin Request",
                         "name": "request",
@@ -356,7 +313,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/handlers.CreateBankAccountRequest"
+                            "$ref": "#/definitions/handlers.CreateBitcoinRequest"
                         }
                     }
                 ],
@@ -380,6 +337,85 @@ const docTemplate = `{
                         }
                     }
                 }
+            }
+        },
+        "/bitcoin-price": {
+            "get": {
+                "description": "Show an Bitcoin Price USD",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bitcoin"
+                ],
+                "summary": "Show Bitcoin Price USD",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/bitcoin/{id}": {
+            "get": {
+                "description": "Show an Bitcoin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bitcoin"
+                ],
+                "summary": "Show Bitcoin",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show Bitcoin Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ShowBitcoinResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_bitcoin.ErrorResponse"
+                        }
+                    }
+                }
             },
             "delete": {
                 "description": "Delete a Bitcoin",
@@ -398,7 +434,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Delete Bitcoin Param",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -424,49 +460,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/fixed_expenses": {
-            "get": {
-                "description": "Show an FixedExpense",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "fixed expense"
-                ],
-                "summary": "Show FixedExpense",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Show FixedExpense Request",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.ShowFixedExpenseResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse"
-                        }
-                    }
-                }
-            },
+        "/fixed-expense": {
             "put": {
                 "description": "Update an FixedExpense",
                 "consumes": [
@@ -480,13 +474,6 @@ const docTemplate = `{
                 ],
                 "summary": "Update an FixedExpense",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "FixedExpense ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    },
                     {
                         "description": "Update FixedExpense Request",
                         "name": "request",
@@ -567,6 +554,50 @@ const docTemplate = `{
                         }
                     }
                 }
+            }
+        },
+        "/fixed-expense/{id}": {
+            "get": {
+                "description": "Show an FixedExpense",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "fixed expense"
+                ],
+                "summary": "Show FixedExpense",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show FixedExpense Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ShowFixedExpenseResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_fixed_expense.ErrorResponse"
+                        }
+                    }
+                }
             },
             "delete": {
                 "description": "Delete an FixedExpense",
@@ -585,7 +616,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Delete FixedExpense Param",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -611,49 +642,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/investments": {
-            "get": {
-                "description": "Show an Investment",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "investment"
-                ],
-                "summary": "Show Investment",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Show Investment Request",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.ShowInvestmentResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse"
-                        }
-                    }
-                }
-            },
+        "/investment": {
             "put": {
                 "description": "Update an Investment",
                 "consumes": [
@@ -667,13 +656,6 @@ const docTemplate = `{
                 ],
                 "summary": "Update an Investment",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Investment ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    },
                     {
                         "description": "Update Investment Request",
                         "name": "request",
@@ -754,6 +736,50 @@ const docTemplate = `{
                         }
                     }
                 }
+            }
+        },
+        "/investment/{id}": {
+            "get": {
+                "description": "Show an Investment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "investment"
+                ],
+                "summary": "Show Investment",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show Investment Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ShowInvestmentResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_investment.ErrorResponse"
+                        }
+                    }
+                }
             },
             "delete": {
                 "description": "Delete an Investment",
@@ -772,7 +798,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Delete Investment Param",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -798,49 +824,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/loans": {
-            "get": {
-                "description": "Show an Loan",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "loan"
-                ],
-                "summary": "Show Loan",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Show Loan Request",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.ShowLoanResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse"
-                        }
-                    }
-                }
-            },
+        "/loan": {
             "put": {
                 "description": "Update an Loan",
                 "consumes": [
@@ -941,6 +925,50 @@ const docTemplate = `{
                         }
                     }
                 }
+            }
+        },
+        "/loan/{id}": {
+            "get": {
+                "description": "Show an Loan",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "loan"
+                ],
+                "summary": "Show Loan",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show Loan Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ShowLoanResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_loan.ErrorResponse"
+                        }
+                    }
+                }
             },
             "delete": {
                 "description": "Delete an Loan",
@@ -959,7 +987,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Delete Loan Param",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -1031,49 +1059,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/transactions": {
-            "get": {
-                "description": "Show an transaction",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "transaction"
-                ],
-                "summary": "Show a transaction",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Show Transaction Request",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.ShowTransactionResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse"
-                        }
-                    }
-                }
-            },
+        "/transaction": {
             "put": {
                 "description": "Update a Transaction",
                 "consumes": [
@@ -1088,19 +1074,12 @@ const docTemplate = `{
                 "summary": "Update a Transaction",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Transaction ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
                         "description": "Update Transaction Request",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/handlers.UpdateUserRequest"
+                            "$ref": "#/definitions/handlers.UpdateTransactionRequest"
                         }
                     }
                 ],
@@ -1174,6 +1153,50 @@ const docTemplate = `{
                         }
                     }
                 }
+            }
+        },
+        "/transaction/{id}": {
+            "get": {
+                "description": "Show an transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transaction"
+                ],
+                "summary": "Show a transaction",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show Transaction Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ShowTransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse"
+                        }
+                    }
+                }
             },
             "delete": {
                 "description": "Delete a transaction",
@@ -1192,7 +1215,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Delete Transaction Param",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -1213,6 +1236,188 @@ const docTemplate = `{
                         "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/{id}": {
+            "get": {
+                "description": "Show all transaction by account id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transaction"
+                ],
+                "summary": "Show all transaction by account id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show List Transaction Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ListTransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_transaction.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user": {
+            "put": {
+                "description": "Update an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update an user",
+                "parameters": [
+                    {
+                        "description": "Update User Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.UpdateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.UpdateUserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "description": "Show an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Show user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show User Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ShowUserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Delete an user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Delete User Param",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.DeleteUserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
                         }
                     }
                 }
@@ -1246,63 +1451,6 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "Update an user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Update an user",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "description": "Update User Request",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/handlers.UpdateUserRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.UpdateUserResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
                         }
@@ -1347,48 +1495,6 @@ const docTemplate = `{
                     },
                     "500": {
                         "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "Delete an user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Delete an user",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Delete User Param",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.DeleteUserResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/github_com_isaiaspereira307_gowallet_handlers_user.ErrorResponse"
                         }
@@ -1680,6 +1786,26 @@ const docTemplate = `{
                 }
             }
         },
+        "handlers.CreateBitcoinRequest": {
+            "type": "object",
+            "required": [
+                "bank_account_id"
+            ],
+            "properties": {
+                "bank_account_id": {
+                    "type": "integer"
+                },
+                "purchase_date": {
+                    "type": "string"
+                },
+                "purchase_price": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "string"
+                }
+            }
+        },
         "handlers.CreateFixedExpenseRequest": {
             "type": "object",
             "required": [
@@ -1920,6 +2046,34 @@ const docTemplate = `{
                 }
             }
         },
+        "handlers.ListBankAccountResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/db.BankAccount"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.ListTransactionResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/db.Transaction"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "handlers.ListUserResponse": {
             "type": "object",
             "properties": {
@@ -2109,15 +2263,11 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "amount",
-                "bank_account_id",
                 "id"
             ],
             "properties": {
                 "amount": {
                     "type": "string"
-                },
-                "bank_account_id": {
-                    "type": "integer"
                 },
                 "id": {
                     "type": "integer"
@@ -2170,6 +2320,29 @@ const docTemplate = `{
                 },
                 "message": {
                     "type": "string"
+                }
+            }
+        },
+        "handlers.UpdateTransactionRequest": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "string"
+                },
+                "bank_account_id": {
+                    "type": "integer"
+                },
+                "credit_debit": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 }
             }
         },

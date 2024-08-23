@@ -6,7 +6,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gowallet/configs"
-	"github.com/isaiaspereira307/gowallet/internal/db"
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -23,7 +22,7 @@ import (
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /login [post]
-func Login(ctx *gin.Context, queries *db.Queries) {
+func Login(ctx *gin.Context) {
 	var creds CredentialsRequest
 	if err := ctx.ShouldBindJSON(&creds); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request payload"})

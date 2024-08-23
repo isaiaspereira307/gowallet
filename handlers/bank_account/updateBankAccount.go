@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gowallet/internal/db"
@@ -14,29 +14,27 @@ import (
 // @Tags bank account
 // @Accept json
 // @Produce json
-// @Param id query string true "BankAccount ID"
 // @Param request body UpdateUserRequest true "Update BankAccount Request"
 // @Success 200 {object} UpdateBankAccountResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /bank_accounts [put]
-func UpdateBankAccount(ctx *gin.Context, queries *db.Queries) {
-	id := ctx.Param("id")
-	idInt32, err := strconv.ParseInt(id, 10, 32)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
-		return
-	}
-
-	var req db.UpdateBankAccountParams
+// @Router /bank_account [put]
+func UpdateBankAccount(ctx *gin.Context) {
+	var req UpdateBankAccountRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
 	}
 
-	req.ID = int32(idInt32)
-	err = queries.UpdateBankAccount(ctx, req)
+	newBankAccount := db.UpdateBankAccountParams{
+		ID:        req.ID,
+		Name:      req.Name,
+		Balance:   req.Balance,
+		UpdatedAt: time.Now(),
+	}
+
+	err := queries.UpdateBankAccount(ctx, newBankAccount)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update bank account"})
 		return

@@ -39,13 +39,12 @@ func (r *CreateInvestmentRequest) Validate() error {
 }
 
 type UpdateInvestmentRequest struct {
-	ID            int32  `json:"id" binding:"required"`
-	BankAccountID int32  `json:"bank_account_id" binding:"required"`
-	Amount        string `json:"amount" binding:"required"`
+	ID     int32  `json:"id" binding:"required"`
+	Amount string `json:"amount" binding:"required"`
 }
 
 func (r *UpdateInvestmentRequest) Validate() error {
-	if r.BankAccountID != 0 || r.Amount != "" {
+	if r.Amount != "" {
 		return nil
 	}
 	return fmt.Errorf("at least one valid field must be provided")

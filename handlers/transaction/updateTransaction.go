@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gowallet/internal/db"
@@ -14,29 +14,33 @@ import (
 // @Tags transaction
 // @Accept json
 // @Produce json
-// @Param id query string true "Transaction ID"
-// @Param request body UpdateUserRequest true "Update Transaction Request"
+// @Param request body UpdateTransactionRequest true "Update Transaction Request"
 // @Success 200 {object} UpdateTransactionResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /transactions [put]
-func UpdateTransaction(ctx *gin.Context, queries *db.Queries) {
-	id := ctx.Param("id")
-	idInt32, err := strconv.ParseInt(id, 10, 32)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
-		return
-	}
-
-	var req db.UpdateTransactionParams
+// @Router /transaction [put]
+func UpdateTransaction(ctx *gin.Context) {
+	var req UpdateTransactionRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
 	}
 
-	req.ID = int32(idInt32)
-	err = queries.UpdateTransaction(ctx, req)
+	err := req.Validate()
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	newTransaction := db.UpdateTransactionParams{
+		ID:          req.ID,
+		Amount:      req.Amount,
+		Description: req.Description,
+		CreditDebit: req.CreditDebit,
+		Timestamp:   time.Now(),
+	}
+	err = queries.UpdateTransaction(ctx, newTransaction)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update transaction"})
 		return

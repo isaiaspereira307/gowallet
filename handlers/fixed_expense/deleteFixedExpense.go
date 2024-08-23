@@ -6,7 +6,6 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
 // @BasePath /api/v1
@@ -15,12 +14,12 @@ import (
 // @Tags fixed expense
 // @Accept json
 // @Produce json
-// @Param id query string true "Delete FixedExpense Param"
+// @Param id path string true "Delete FixedExpense Param"
 // @Success 200 {object} DeleteFixedExpenseResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /fixed_expenses [delete]
-func DeleteFixedExpense(ctx *gin.Context, queries *db.Queries) {
+// @Router /fixed-expense/{id} [delete]
+func DeleteFixedExpense(ctx *gin.Context) {
 	id := ctx.Param("id")
 	idInt64, err := strconv.ParseInt(id, 10, 64)
 	if err != nil || idInt64 > math.MaxInt32 || idInt64 < math.MinInt32 {

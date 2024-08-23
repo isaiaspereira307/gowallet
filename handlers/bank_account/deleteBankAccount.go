@@ -6,7 +6,6 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/isaiaspereira307/gowallet/internal/db"
 )
 
 // @BasePath /api/v1
@@ -15,12 +14,12 @@ import (
 // @Tags bank account
 // @Accept json
 // @Produce json
-// @Param id query string true "Delete BankAccount Param"
+// @Param id path string true "Delete BankAccount Param"
 // @Success 200 {object} DeleteBankAccountResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /bank_accounts [delete]
-func DeleteBankAccount(ctx *gin.Context, queries *db.Queries) {
+// @Router /bank-account/{id} [delete]
+func DeleteBankAccount(ctx *gin.Context) {
 	id := ctx.Param("id")
 	idInt64, err := strconv.ParseInt(id, 10, 64)
 	if err != nil || idInt64 > math.MaxInt32 || idInt64 < math.MinInt32 {

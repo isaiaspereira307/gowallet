@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gowallet/internal/db"
@@ -14,29 +13,31 @@ import (
 // @Tags fixed expense
 // @Accept json
 // @Produce json
-// @Param id query string true "FixedExpense ID"
 // @Param request body UpdateFixedExpenseRequest true "Update FixedExpense Request"
 // @Success 200 {object} UpdateFixedExpenseResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /fixed_expenses [put]
-func UpdateFixedExpense(ctx *gin.Context, queries *db.Queries) {
-	id := ctx.Param("id")
-	idInt32, err := strconv.ParseInt(id, 10, 32)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
-		return
-	}
-
-	var req db.UpdateFixedExpenseParams
+// @Router /fixed-expense [put]
+func UpdateFixedExpense(ctx *gin.Context) {
+	var req UpdateFixedExpenseRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
 	}
 
-	req.ID = int32(idInt32)
-	err = queries.UpdateFixedExpense(ctx, req)
+	err := req.Validate()
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	newFixedExpense := db.UpdateFixedExpenseParams{
+		ID:          req.ID,
+		Amount:      req.Amount,
+		Description: req.Description,
+	}
+	err = queries.UpdateFixedExpense(ctx, newFixedExpense)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update fixed expense"})
 		return
